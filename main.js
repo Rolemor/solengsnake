@@ -2,6 +2,7 @@ let blockSize = 25;
 let total_row = 17; //total row number
 let total_col = 17; //total column number
 let board;
+let scoreTable;
 let context;
 
 let snakeX = blockSize * 5;
@@ -35,6 +36,11 @@ window.onload = function () {
     board.height = total_row * blockSize;
     board.width = total_col * blockSize;
     context = board.getContext("2d");
+    //Set Score table size
+    scoreTable = document.getElementById("board");
+    scoreTable.height = total_row * blockSize;
+    board.width = total_col * blockSize;
+    context = board.getContext("2d");
 
     
     placeFood();
@@ -54,6 +60,10 @@ function update() {
     // Background of a Game
     context.fillStyle = "green";
     context.fillRect(0, 0, board.width, board.height);
+
+    //Score Board
+    context.fillStyle = "brown";
+    context.fillRect(0, 0, scoreTable.width, scoreTable.height);
 
     // Set score board
     context.fillStyle = "white";

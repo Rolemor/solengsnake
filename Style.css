@@ -1,9 +1,12 @@
 body {
     text-align: center;
-    background-color: darkolivegreen;
+    background-color: black;
+    border: solid 2px;
+    border-color: white;
+    border-radius: 50px;
 }
 .title {
     font-size: 40px;
     font-weight: bold;
-    color:aliceblue
+    color:aliceblue;
 }
