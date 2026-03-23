@@ -12,6 +12,7 @@ let speedX = 0;  //speed of snake in x coordinate.
 let speedY = 0;  //speed of snake in Y coordinate.
 
 let snakeBody = [];
+let score;
 
 let foodX;
 let foodY;
@@ -48,9 +49,16 @@ function update() {
         return;
     }
 
+    score = snakeBody.length;
+
     // Background of a Game
     context.fillStyle = "green";
     context.fillRect(0, 0, board.width, board.height);
+
+    // Set score board
+    context.fillStyle = "white";
+    context.font = "20px Arial";
+    context.fillText("Score: " + score, 10, 25);
 
     // Set food color and position
     
@@ -139,6 +147,8 @@ function initGame() {
 
     speedX = 0;
     speedY = 0;
+
+    score = 0;
 
     snakeBody = [];
     gameOver = false;
