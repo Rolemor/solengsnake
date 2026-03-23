@@ -19,10 +19,15 @@ let foodX;
 let foodY;
 
 let gameOver = false;
+let rotationCounter = 0;
+let currentRotation = '';
 
 //Define food image
 let food_img = new Image();
 food_img.src = 'apple.png';
+
+let snakeHead = new Image();
+let snake = new Image();
 
 document.addEventListener("keyup", function (e) {
     if (e.code === "KeyR") {
@@ -69,7 +74,7 @@ function update() {
     context.fillStyle = "white";
     context.font = "20px Arial";
     context.fillText("Score: " + score, 10, 25);
-
+    context.fillText("currentRotation: " + currentRotation, 10, 50)
     // Set food color and position
     
     context.drawImage(food_img, foodX, foodY, blockSize, blockSize);
@@ -91,9 +96,39 @@ function update() {
     context.fillStyle = "white";
     snakeX += speedX * blockSize; //updating Snake position in X coordinate.
     snakeY += speedY * blockSize;  //updating Snake position in Y coordinate.
-    context.fillRect(snakeX, snakeY, blockSize, blockSize);
+    switch(currentRotation){
+        case 'Down': 
+        snakeHead.src = 'snakeHeadDown.png';
+        context.drawImage(snakeHead, snakeX, snakeY, blockSize, blockSize);
+        case 'Up': 
+        snakeHead.src = 'snakeHeadUp.png';
+        context.drawImage(snakeHead, snakeX, snakeY, blockSize, blockSize);
+        case 'Left': 
+        snakeHead.src = 'snakeHeadLeft.png';
+        context.drawImage(snakeHead, snakeX, snakeY, blockSize, blockSize);
+        case 'Right': 
+        snakeHead.src = 'snakeHeadRight.png';
+        context.drawImage(snakeHead, snakeX, snakeY, blockSize, blockSize);
+        case '': 
+        snakeHead.src = 'snakeHeadDown.png';
+        context.drawImage(snakeHead, snakeX, snakeY, blockSize, blockSize);
+    }
+    
     for (let i = 0; i < snakeBody.length; i++) {
-        context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+        switch (currentRotation){
+        case 'Up':
+            snake.src = 'snakeBodyUp.png';
+            context.drawImage(snake,snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+        case 'Down':
+            snake.src = 'snakeBodyDown.png';
+            context.drawImage(snake,snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+        case 'Left':
+            snake.src = 'snakeBodyLeft.png';
+            context.drawImage(snake,snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+        case 'Right':
+            snake.src = 'snakeBodyRight.png';
+            context.drawImage(snake,snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+    }
     }
 
     if (snakeX < 0 
@@ -123,21 +158,29 @@ function changeDirection(e) {
         // snake will not move in the opposite direction
         speedX = 0;
         speedY = -1;
+        rotationCounter = 0;
+        currentRotation = 'Up';
     }
     else if (e.code == "ArrowDown" && speedY != -1) {
         //If down arrow key pressed
         speedX = 0;
         speedY = 1;
+        rotationCounter = 0;
+        currentRotation = 'Down';
     }
     else if (e.code == "ArrowLeft" && speedX != 1) {
         //If left arrow key pressed
         speedX = -1;
         speedY = 0;
+        rotationCounter = 0;
+        currentRotation = 'Left';
     }
     else if (e.code == "ArrowRight" && speedX != -1) { 
         //If Right arrow key pressed
         speedX = 1;
         speedY = 0;
+        rotationCounter = 0;
+        currentRotation = 'Right';
     }
 }
 
