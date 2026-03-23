@@ -1,8 +1,9 @@
 body {
     text-align: center;
+    background-color: darkolivegreen;
 }
 .geeks {
     font-size: 40px;
     font-weight: bold;
-    color: green;
+    color:aliceblue
 }

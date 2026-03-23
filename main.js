@@ -18,6 +18,10 @@ let foodY;
 
 let gameOver = false;
 
+//Define food image
+let food_img = new Image();
+food_img.src = 'apple.png';
+
 window.onload = function () {
     // Set board height and width
     board = document.getElementById("board");
@@ -42,7 +46,7 @@ function update() {
 
     // Set food color and position
     context.fillStyle = "yellow";
-    context.fillRect(foodX, foodY, blockSize, blockSize);
+    context.drawImage(food_img, foodX, foodY, blockSize, blockSize);
 
     if (snakeX == foodX && snakeY == foodY) {
         snakeBody.push([foodX, foodY]);
