@@ -22,6 +22,12 @@ let gameOver = false;
 let food_img = new Image();
 food_img.src = 'apple.png';
 
+document.addEventListener("keyup", function (e) {
+    if (e.code === "KeyR") {
+        gameReset();
+    }
+});
+
 window.onload = function () {
     // Set board height and width
     board = document.getElementById("board");
@@ -30,6 +36,7 @@ window.onload = function () {
     context = board.getContext("2d");
 
     placeFood();
+    initGame();
     document.addEventListener("keyup", changeDirection);  //for movements
     // Set snake speed
     setInterval(update, 1000 / 10);
@@ -123,4 +130,25 @@ function placeFood() {
     
     //in y coordinates.
     foodY = Math.floor(Math.random() * total_row) * blockSize; 
+}
+
+function initGame() {
+    snakeX = blockSize * 5;
+    snakeY = blockSize * 5;
+
+    speedX = 0;
+    speedY = 0;
+
+    snakeBody = [];
+    gameOver = false;
+
+    placeFood();
+
+    // Optional: clear the board immediately
+    context.fillStyle = "green";
+    context.fillRect(0, 0, board.width, board.height);
+}
+
+function gameReset() {
+    initGame();
 }
