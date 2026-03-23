@@ -35,6 +35,7 @@ window.onload = function () {
     board.width = total_col * blockSize;
     context = board.getContext("2d");
 
+    
     placeFood();
     initGame();
     document.addEventListener("keyup", changeDirection);  //for movements
@@ -52,7 +53,7 @@ function update() {
     context.fillRect(0, 0, board.width, board.height);
 
     // Set food color and position
-    context.fillStyle = "yellow";
+    
     context.drawImage(food_img, foodX, foodY, blockSize, blockSize);
 
     if (snakeX == foodX && snakeY == foodY) {
